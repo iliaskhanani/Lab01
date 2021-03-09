@@ -14,26 +14,34 @@ public class FXMLController {
 	
 	Parole elenco ;
 
-    @FXML
-    private ResourceBundle resources;
+	 @FXML
+	    private ResourceBundle resources;
 
-    @FXML
-    private URL location;
+	    @FXML
+	    private URL location;
 
-    @FXML
-    private TextField txtParola;
+	    @FXML
+	    private TextField txtParola;
 
-    @FXML
-    private Button btnInserisci;
+	    @FXML
+	    private Button btnInserisci;
 
-    @FXML
-    private TextArea txtResult;
+	    @FXML
+	    private TextArea txtResult;
 
-    @FXML
-    private Button btnReset;
+	    @FXML
+	    private Button btnCancella;
 
+	    @FXML
+	    private Button btnReset;
+	    
+	    @FXML
+	    private TextField txtTime;
+	    
+	    
     @FXML
     void doInsert(ActionEvent event) {
+    	long time1 = System.nanoTime();
     	elenco.addParola(txtParola.getText());
     	this.txtParola.setText("");
     	String risultato = "";
@@ -43,13 +51,32 @@ public class FXMLController {
     	}
     	
     	txtResult.setText(risultato);
+    	txtTime.setText("Tempo di esecuzione: "+ (System.nanoTime()-time1));
     }
 
     @FXML
     void doReset(ActionEvent event) {
+    	long time1 = System.nanoTime();
     	elenco.reset();
     	this.txtResult.setText("");
+    	txtTime.setText("Tempo di esecuzione: "+ (System.nanoTime()-time1));
     }
+    
+    @FXML
+    void doCancella(ActionEvent event) {
+    	long time1 = System.nanoTime();
+    	elenco.cancella(txtResult.getSelectedText());
+    	String risultato = "";
+    	
+    	for(String s : elenco.getElenco()) {
+    		risultato += s + "\n";
+    	}
+    	
+    	txtResult.setText(risultato);
+    	txtTime.setText("Tempo di esecuzione: "+ (System.nanoTime()-time1));
+
+    }
+
 
     @FXML
     void initialize() {

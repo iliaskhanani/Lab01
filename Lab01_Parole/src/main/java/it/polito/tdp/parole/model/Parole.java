@@ -1,5 +1,6 @@
 package it.polito.tdp.parole.model;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,10 @@ public class Parole {
 	
 	public void reset() {
 		elenco.clear();
+	}
+	
+	public void cancella(String s) {
+		elenco.remove(s);
 	}
 
 }
